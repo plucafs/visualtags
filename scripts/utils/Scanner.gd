@@ -3,7 +3,7 @@ extends Node
 
 # Hidden directories and files are excluded via the property `include_hidden` set
 # to the `DirAccess` object
-var os_slash = "\\" if Utils.is_os_windows() else "/"
+var os_slash = Utils.get_os_slash()
 var excluded_dirs = [
 	os_slash + "Heroic",
 	os_slash + "node_modules",
@@ -51,6 +51,7 @@ func get_files(directory: String, depth: int, file_list: Array, tag_list: Array)
 	dir.list_dir_begin()
 	
 	var skip = false
+	var slash_os = Utils.get_os_slash()
 	while true:
 		skip = false
 		var file_name = dir.get_next()
@@ -71,12 +72,12 @@ func get_files(directory: String, depth: int, file_list: Array, tag_list: Array)
 					depth_counter = 0
 					continue
 				depth_counter += 1
-			var slash = "" if file_name.begins_with("/") || directory.ends_with("/") else "/"
+			var slash = "" if file_name.begins_with(slash_os) || directory.ends_with(slash_os) else slash_os
 			var new_directory = directory + slash + file_name
 			get_files(new_directory, depth, file_list, tag_list)
 		else:
 			counter_searched_files += 1
-			var slash = "" if file_name.begins_with("/") || directory.ends_with("/") else "/"
+			var slash = "" if file_name.begins_with(slash_os) || directory.ends_with(slash_os) else slash_os
 			var file_directory = directory + slash + file_name
 			var metadata := {
 				"file_name": file_name,
@@ -112,6 +113,7 @@ func get_number_of_files_to_analyze(depth: int, directory: String, is_recursive 
 	dir.include_navigational = false
 	dir.list_dir_begin()
 	
+	var slash_os = Utils.get_os_slash()
 	while true:
 		var file_name = dir.get_next()
 		if file_name.strip_edges().is_empty(): break
@@ -124,7 +126,7 @@ func get_number_of_files_to_analyze(depth: int, directory: String, is_recursive 
 					depth_counter = 0
 					continue
 				depth_counter += 1
-			var slash = "" if file_name.begins_with("/") || directory.ends_with("/") else "/"
+			var slash = "" if file_name.begins_with(slash_os) || directory.ends_with(slash_os) else slash_os
 			var new_directory = directory + slash + file_name
 			get_number_of_files_to_analyze(depth, new_directory, true)
 		else:

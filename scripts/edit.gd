@@ -7,14 +7,14 @@ var tag_label = preload("res://scenes/tag_label.tscn")
 @onready var file_tags_line_edit = %FileTagsLineEdit as LineEdit
 @onready var tags_container: HBoxContainer = %TagsLabelsContainer
 
-const SPACE_DASH_DASH_SPACE_CHARS 	:= " -- "
-const SPACE_CHAR 					:= " "
-const DOT_CHAR 						:= "."
+const SPACE_DASH_DASH_SPACE_CHARS := " -- "
+const SPACE_CHAR := " "
+const DOT_CHAR := "."
 
-var active_dir 						:= ""
-var working_element_index			:= 0
-var show_more 						:= false
-var file_ext 						:= ""
+var active_dir := ""
+var working_element_index := 0
+var show_more := false
+var file_ext := ""
 
 func _ready() -> void:
 	SignalBus.connect("active_file_name_selected", _on_active_file_name_selected)
@@ -79,7 +79,8 @@ func _on_edit_minimize_button_toggled(toggled_on: bool) -> void:
 	self.visible = !visible
 
 func update_file_name(new_name: String):
-	var dir_parts := Array(active_dir.split("/"))
+	var slash = Utils.get_os_slash()
+	var dir_parts := Array(active_dir.split(slash))
 	dir_parts = dir_parts.filter(func(part: String): return part.to_lower().strip_edges() != "")
 	var file_name = dir_parts[-1]
 
@@ -98,9 +99,9 @@ func update_file_name(new_name: String):
 		tags = file_name.split(SPACE_DASH_DASH_SPACE_CHARS)[-1]
 		dir_parts.remove_at(dir_parts.size() - 1)
 		dir_parts.push_back(
-			new_name 					+
+			new_name +
 			SPACE_DASH_DASH_SPACE_CHARS +
-			tags.strip_edges() 			+
+			tags.strip_edges() +
 			file_ext
 		)
 	else:
@@ -111,7 +112,7 @@ func update_file_name(new_name: String):
 		
 		tags = ""
 	
-	var new_file_path = "/" + "/".join(dir_parts)
+	var new_file_path = slash + slash.join(dir_parts)
 	
 	print("New file name\n	%s\n	%s" % [active_dir, new_file_path])
 	
@@ -122,11 +123,12 @@ func update_file_name(new_name: String):
 		active_dir = ""
 
 func update_file_tag(new_tags: PackedStringArray):
+	var slash = Utils.get_os_slash()
 	var extension = active_dir.get_extension()
 	if extension.is_empty(): pass
 	
 		# -1: "abc -- d e f"
-	var file_name_parts = active_dir.split("/", false)
+	var file_name_parts = active_dir.split(slash, false)
 		# ["abc", "d e f"]
 	var name_and_tags = file_name_parts[-1].split(SPACE_DASH_DASH_SPACE_CHARS)
 		# "abc"
@@ -139,16 +141,16 @@ func update_file_tag(new_tags: PackedStringArray):
 		# from the file name
 		if new_tags.is_empty():
 			file_name_parts.push_back(
-				old_file_name 			+
-				DOT_CHAR 					+
+				old_file_name +
+				DOT_CHAR +
 				extension
 			)
 		else:
 			file_name_parts.push_back(
-				old_file_name 			+
-				SPACE_DASH_DASH_SPACE_CHARS 	+
-				" ".join(new_tags) 		+
-				DOT_CHAR 					+
+				old_file_name +
+				SPACE_DASH_DASH_SPACE_CHARS +
+				" ".join(new_tags) +
+				DOT_CHAR +
 				extension
 			)
 	else:
@@ -172,7 +174,7 @@ func update_file_tag(new_tags: PackedStringArray):
 			+ extension
 		)
 
-	var new_file_path = "/" + "/".join(file_name_parts)
+	var new_file_path = slash + slash.join(file_name_parts)
 	print("New tags\n	%s\n	%s" % [active_dir, new_file_path])
 	
 	var err := DirAccess.rename_absolute(active_dir, new_file_path)
