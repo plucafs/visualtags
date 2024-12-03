@@ -3,14 +3,14 @@ extends Node
 
 # Hidden directories and files are excluded via the property `include_hidden` set
 # to the `DirAccess` object
+var os_slash = "\\" if Utils.is_os_windows() else "/"
 var excluded_dirs = [
-	"/[...]",
-	"/Heroic",
-	"/node_modules",
-	"/installer_files",
-	"/dist",
-	"/build",
-	"/target",
+	os_slash + "Heroic",
+	os_slash + "node_modules",
+	os_slash + "installer_files",
+	os_slash + "dist",
+	os_slash + "build",
+	os_slash + "target",
 ]
 var counter_searched_files = 0
 var depth_counter = 0
@@ -92,7 +92,7 @@ func get_files(directory: String, depth: int, file_list: Array, tag_list: Array)
 					file_list.append(metadata)
 					continue
 
-			var file_tags_list = TagUtils.extract_tags(file_name) 
+			var file_tags_list = TagUtils.extract_tags(file_name)
 			for tag in file_tags_list:
 				tag_list.append(tag)
 				
