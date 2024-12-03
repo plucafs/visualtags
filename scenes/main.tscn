@@ -1,0 +1,160 @@
+[gd_scene load_steps=13 format=3 uid="uid://dyyh4lcqn5jdv"]
+
+[ext_resource type="Theme" uid="uid://das6ewq80stry" path="res://themes/firefox.tres" id="1_e5coh"]
+[ext_resource type="Script" path="res://scripts/Main.gd" id="1_gaynp"]
+[ext_resource type="PackedScene" uid="uid://1hfenpjd2sb1" path="res://scenes/edit_box.tscn" id="2_0ue82"]
+[ext_resource type="PackedScene" uid="uid://cojm6a1xep0vn" path="res://scenes/search_bar.tscn" id="3_f44iq"]
+[ext_resource type="PackedScene" uid="uid://cya0pn7qepwbr" path="res://scenes/status_bar.tscn" id="4_fo1be"]
+[ext_resource type="Script" path="res://scripts/TagsViewsSplitContainer.gd" id="4_ovqc0"]
+[ext_resource type="Script" path="res://scripts/TagItemList.gd" id="5_amuqa"]
+[ext_resource type="PackedScene" uid="uid://w4lrobiltwev" path="res://scenes/top_bar.tscn" id="5_u4ygl"]
+[ext_resource type="Script" path="res://scripts/TagHistoryItemList.gd" id="6_cmfhx"]
+[ext_resource type="Script" path="res://scripts/FilesItemList.gd" id="7_ao4m7"]
+[ext_resource type="Script" path="res://scripts/recent_dirs_option.gd" id="7_d02vx"]
+[ext_resource type="PackedScene" uid="uid://bna8bqlvuympc" path="res://scenes/bottom_bar.tscn" id="8_wf5c8"]
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_e5coh")
+script = ExtResource("1_gaynp")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="HBoxContainer" type="HSplitContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 8
+
+[node name="TagsSearchBar" parent="MarginContainer/HBoxContainer/VBoxContainer2" instance=ExtResource("3_f44iq")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="TagsViewsSplitContainer" type="VSplitContainer" parent="MarginContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+script = ExtResource("4_ovqc0")
+
+[node name="TagItemList" type="ItemList" parent="MarginContainer/HBoxContainer/VBoxContainer2/TagsViewsSplitContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+focus_next = NodePath("../../../VBoxContainer/FilesItemList")
+focus_previous = NodePath("../../TagsSearchBar/SearchTagLineEdit")
+script = ExtResource("5_amuqa")
+
+[node name="TagHistoryItemList" type="ItemList" parent="MarginContainer/HBoxContainer/VBoxContainer2/TagsViewsSplitContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.5
+script = ExtResource("6_cmfhx")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="RecentDirsOption" type="OptionButton" parent="MarginContainer/HBoxContainer/VBoxContainer2/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text_overrun_behavior = 3
+fit_to_longest_item = false
+allow_reselect = true
+script = ExtResource("7_d02vx")
+
+[node name="StatusBar" parent="MarginContainer/HBoxContainer/VBoxContainer2/VBoxContainer" instance=ExtResource("4_fo1be")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.0
+theme_override_constants/separation = 8
+
+[node name="TopBar" parent="MarginContainer/HBoxContainer/VBoxContainer" instance=ExtResource("5_u4ygl")]
+layout_mode = 2
+
+[node name="FilesItemList" type="ItemList" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 3.0
+focus_previous = NodePath("../../VBoxContainer2/TagsViewsSplitContainer/TagItemList")
+script = ExtResource("7_ao4m7")
+
+[node name="EditBox" parent="MarginContainer/HBoxContainer/VBoxContainer" instance=ExtResource("2_0ue82")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+
+[node name="BottomBar" parent="MarginContainer/HBoxContainer/VBoxContainer" instance=ExtResource("8_wf5c8")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="DirectoryScanFileDialog" type="FileDialog" parent="CanvasLayer"]
+unique_name_in_owner = true
+title = "Open a Directory"
+position = Vector2i(0, 36)
+size = Vector2i(763, 204)
+theme = ExtResource("1_e5coh")
+ok_button_text = "Select Current Folder"
+mode_overrides_title = false
+file_mode = 2
+access = 2
+show_hidden_files = true
+use_native_dialog = true
+
+[node name="ConfirmationDialog" type="ConfirmationDialog" parent="CanvasLayer"]
+unique_name_in_owner = true
+position = Vector2i(0, 36)
+theme = ExtResource("1_e5coh")
+ok_button_text = "Yes"
+dialog_autowrap = true
+
+[connection signal="dragged" from="MarginContainer/HBoxContainer/VBoxContainer2/TagsViewsSplitContainer" to="." method="_on_tags_views_split_container_dragged"]
+[connection signal="dragged" from="MarginContainer/HBoxContainer/VBoxContainer2/TagsViewsSplitContainer" to="MarginContainer/HBoxContainer/VBoxContainer2/TagsViewsSplitContainer" method="_on_dragged"]
+[connection signal="dragged" from="MarginContainer/HBoxContainer/VBoxContainer2/TagsViewsSplitContainer" to="MarginContainer/HBoxContainer/VBoxContainer2/TagsViewsSplitContainer/TagHistoryItemList" method="_on_tags_views_split_container_dragged"]
+[connection signal="item_activated" from="MarginContainer/HBoxContainer/VBoxContainer2/TagsViewsSplitContainer/TagItemList" to="." method="_on_tag_item_list_item_activated"]
+[connection signal="item_selected" from="MarginContainer/HBoxContainer/VBoxContainer2/TagsViewsSplitContainer/TagItemList" to="." method="_on_tag_item_list_item_selected"]
+[connection signal="multi_selected" from="MarginContainer/HBoxContainer/VBoxContainer2/TagsViewsSplitContainer/TagItemList" to="." method="_on_tag_item_list_multi_selected"]
+[connection signal="item_selected" from="MarginContainer/HBoxContainer/VBoxContainer2/TagsViewsSplitContainer/TagHistoryItemList" to="." method="_on_tag_history_item_list_item_selected"]
+[connection signal="focus_entered" from="MarginContainer/HBoxContainer/VBoxContainer/FilesItemList" to="MarginContainer/HBoxContainer/VBoxContainer/FilesItemList" method="_on_focus_entered"]
+[connection signal="item_activated" from="MarginContainer/HBoxContainer/VBoxContainer/FilesItemList" to="." method="_on_files_item_list_item_activated"]
+[connection signal="item_clicked" from="MarginContainer/HBoxContainer/VBoxContainer/FilesItemList" to="." method="_on_files_item_list_item_clicked"]
+[connection signal="item_selected" from="MarginContainer/HBoxContainer/VBoxContainer/FilesItemList" to="." method="_on_files_item_list_item_selected"]
+[connection signal="rename_completed" from="MarginContainer/HBoxContainer/VBoxContainer/EditBox" to="." method="_on_edit_rename_completed"]
+[connection signal="dir_selected" from="CanvasLayer/DirectoryScanFileDialog" to="." method="_on_directory_scan_file_dialog_dir_selected"]
+[connection signal="confirmed" from="CanvasLayer/ConfirmationDialog" to="." method="_on_confirmation_dialog_confirmed"]

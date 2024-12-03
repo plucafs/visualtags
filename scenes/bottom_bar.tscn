@@ -1,0 +1,53 @@
+[gd_scene load_steps=8 format=3 uid="uid://bna8bqlvuympc"]
+
+[ext_resource type="Script" path="res://scripts/bottom_bar.gd" id="1_xudv4"]
+[ext_resource type="Texture2D" uid="uid://bhnm1uii1ikkx" path="res://icons/folder-plus.svg" id="2_io2lm"]
+[ext_resource type="Texture2D" uid="uid://bdbirrwsrkfiv" path="res://icons/send.svg" id="3_1jubi"]
+[ext_resource type="Texture2D" uid="uid://c4p7hobqk4kmo" path="res://icons/chevron-down.svg" id="3_somv2"]
+[ext_resource type="Script" path="res://scripts/ScanDirectoryButton.gd" id="4_icahn"]
+[ext_resource type="Texture2D" uid="uid://c8f70xcrng8bc" path="res://icons/compass.svg" id="5_n1oih"]
+[ext_resource type="Script" path="res://scripts/CountDirectoryButton.gd" id="6_ib1xm"]
+
+[node name="BottomBar" type="HBoxContainer"]
+script = ExtResource("1_xudv4")
+
+[node name="SelectDirectoryButton" type="TextureButton" parent="."]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture_normal = ExtResource("2_io2lm")
+stretch_mode = 3
+
+[node name="DirectoryLineEdit" type="LineEdit" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Select or write a path to a directory"
+
+[node name="ScanDirectoryButton" type="TextureButton" parent="."]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+tooltip_text = "Scan the selected directory"
+texture_normal = ExtResource("3_1jubi")
+ignore_texture_size = true
+stretch_mode = 3
+script = ExtResource("4_icahn")
+
+[node name="CountDirectoryButton" type="TextureButton" parent="."]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+tooltip_text = "Get the number of files elaborated"
+texture_normal = ExtResource("5_n1oih")
+ignore_texture_size = true
+stretch_mode = 3
+script = ExtResource("6_ib1xm")
+
+[node name="HistoryDirectoriesButton" type="TextureButton" parent="."]
+visible = false
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture_normal = ExtResource("3_somv2")
+stretch_mode = 3
+
+[connection signal="pressed" from="SelectDirectoryButton" to="." method="_on_select_directory_button_pressed"]
+[connection signal="pressed" from="HistoryDirectoriesButton" to="." method="_on_history_directories_button_pressed"]

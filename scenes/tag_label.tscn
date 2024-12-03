@@ -1,0 +1,36 @@
+[gd_scene load_steps=3 format=3 uid="uid://crpjwu5donnvu"]
+
+[ext_resource type="Script" path="res://scripts/tag_label.gd" id="1_ifvch"]
+[ext_resource type="Texture2D" uid="uid://bvu1mwr2t852s" path="res://icons/x.svg" id="1_obwk5"]
+
+[node name="TagLabel" type="PanelContainer"]
+custom_minimum_size = Vector2(0, 32)
+offset_right = 152.0
+offset_bottom = 31.0
+script = ExtResource("1_ifvch")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_right = 8
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+vertical_alignment = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="DeleteTagButton" type="TextureButton" parent="MarginContainer/HBoxContainer/CenterContainer"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+texture_normal = ExtResource("1_obwk5")
+ignore_texture_size = true
+stretch_mode = 0
+
+[connection signal="pressed" from="MarginContainer/HBoxContainer/CenterContainer/DeleteTagButton" to="." method="_on_delete_tag_button_pressed"]

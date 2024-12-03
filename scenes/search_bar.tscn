@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3 uid="uid://cojm6a1xep0vn"]
+
+[ext_resource type="PackedScene" uid="uid://cv41ye6xiwbec" path="res://scenes/icons_bar.tscn" id="1_edljt"]
+[ext_resource type="Texture2D" uid="uid://dwnid2rbblsw6" path="res://icons/settings.svg" id="1_in5vn"]
+[ext_resource type="Script" path="res://scripts/search_tag_line_edit.gd" id="1_ryo0s"]
+[ext_resource type="Script" path="res://scripts/GoToSettingPageButton.gd" id="2_8ivex"]
+
+[node name="SearchBar" type="HBoxContainer"]
+
+[node name="SearchTagLineEdit" type="LineEdit" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 8.0
+focus_next = NodePath("../../TagsViewsSplitContainer/TagItemList")
+placeholder_text = "Search a tag"
+clear_button_enabled = true
+script = ExtResource("1_ryo0s")
+
+[node name="GoToSettingPageButton" type="TextureButton" parent="."]
+visible = false
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+tooltip_text = "Scan the last directory"
+toggle_mode = true
+button_pressed = true
+texture_normal = ExtResource("1_in5vn")
+stretch_mode = 3
+script = ExtResource("2_8ivex")
+
+[node name="Settings" parent="." instance=ExtResource("1_edljt")]
+visible = false
+layout_mode = 2

@@ -1,0 +1,1 @@
+icons_color = "#dee2e6ff"

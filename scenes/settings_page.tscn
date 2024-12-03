@@ -1,0 +1,156 @@
+[gd_scene load_steps=8 format=3 uid="uid://c0pg438c0bucv"]
+
+[ext_resource type="Script" path="res://scripts/settings_page.gd" id="1_appcd"]
+[ext_resource type="Theme" uid="uid://das6ewq80stry" path="res://themes/firefox.tres" id="1_coab0"]
+[ext_resource type="Texture2D" uid="uid://ddskisy0jc106" path="res://icons/arrow-left.svg" id="2_e3f2y"]
+[ext_resource type="Script" path="res://scripts/VersionLabel.gd" id="4_medyt"]
+[ext_resource type="Texture2D" uid="uid://2cy5yyyfb23" path="res://icons/crop.svg" id="4_umold"]
+[ext_resource type="Texture2D" uid="uid://bvu1mwr2t852s" path="res://icons/x.svg" id="4_yew0u"]
+[ext_resource type="Script" path="res://scripts/ResetTogglesButton.gd" id="5_ld7x8"]
+
+[node name="SettingsPage" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_coab0")
+script = ExtResource("1_appcd")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PageContainer" type="VBoxContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SettingsContainer" type="VBoxContainer" parent="PageContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="PageContainer/SettingsContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 12
+
+[node name="TagsContainer" type="VBoxContainer" parent="PageContainer/SettingsContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="PageContainer/SettingsContainer/MarginContainer/TagsContainer"]
+layout_mode = 2
+
+[node name="BackButton" type="TextureButton" parent="PageContainer/SettingsContainer/MarginContainer/TagsContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture_normal = ExtResource("2_e3f2y")
+stretch_mode = 3
+
+[node name="SearchSettingLineEdit" type="LineEdit" parent="PageContainer/SettingsContainer/MarginContainer/TagsContainer/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Search a setting by name and description"
+
+[node name="TagsButton" type="TextureButton" parent="PageContainer/SettingsContainer/MarginContainer/TagsContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture_normal = ExtResource("4_umold")
+stretch_mode = 3
+
+[node name="TagButtonsContainer" type="HFlowContainer" parent="PageContainer/SettingsContainer/MarginContainer/TagsContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/h_separation = 16
+theme_override_constants/v_separation = 10
+alignment = 1
+
+[node name="ResetTogglesButton" type="TextureButton" parent="PageContainer/SettingsContainer/MarginContainer/TagsContainer/TagButtonsContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture_normal = ExtResource("4_yew0u")
+stretch_mode = 3
+script = ExtResource("5_ld7x8")
+
+[node name="PanelContainer" type="PanelContainer" parent="PageContainer/SettingsContainer/MarginContainer"]
+visible = false
+layout_mode = 2
+
+[node name="SettingsScrollContainer" type="ScrollContainer" parent="PageContainer/SettingsContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="SettingsContainer" type="VBoxContainer" parent="PageContainer/SettingsContainer/SettingsScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 16
+
+[node name="PanelContainer" type="PanelContainer" parent="PageContainer"]
+layout_mode = 2
+
+[node name="InfoAndSocialsContainer" type="MarginContainer" parent="PageContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_right = 8
+
+[node name="ColorRect" type="ColorRect" parent="PageContainer/PanelContainer/InfoAndSocialsContainer"]
+layout_mode = 2
+color = Color(0.0941176, 0.0980392, 0.113725, 1)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PageContainer/PanelContainer/InfoAndSocialsContainer"]
+layout_mode = 2
+
+[node name="VersionLabel" type="Label" parent="PageContainer/PanelContainer/InfoAndSocialsContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("4_medyt")
+
+[node name="GitHubButton" type="TextureButton" parent="PageContainer/PanelContainer/InfoAndSocialsContainer/HBoxContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture_normal = ExtResource("4_yew0u")
+stretch_mode = 3
+script = ExtResource("5_ld7x8")
+
+[node name="KoFiButton" type="TextureButton" parent="PageContainer/PanelContainer/InfoAndSocialsContainer/HBoxContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture_normal = ExtResource("4_yew0u")
+stretch_mode = 3
+script = ExtResource("5_ld7x8")
+
+[node name="BuyMeACoffeeButton" type="TextureButton" parent="PageContainer/PanelContainer/InfoAndSocialsContainer/HBoxContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture_normal = ExtResource("4_yew0u")
+stretch_mode = 3
+script = ExtResource("5_ld7x8")
+
+[node name="PatreonButton" type="TextureButton" parent="PageContainer/PanelContainer/InfoAndSocialsContainer/HBoxContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture_normal = ExtResource("4_yew0u")
+stretch_mode = 3
+script = ExtResource("5_ld7x8")
+
+[connection signal="pressed" from="PageContainer/SettingsContainer/MarginContainer/TagsContainer/HBoxContainer2/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="text_changed" from="PageContainer/SettingsContainer/MarginContainer/TagsContainer/HBoxContainer2/SearchSettingLineEdit" to="." method="_on_search_setting_line_edit_text_changed"]
+[connection signal="pressed" from="PageContainer/SettingsContainer/MarginContainer/TagsContainer/HBoxContainer2/TagsButton" to="." method="_on_tags_button_pressed"]
+[connection signal="pressed" from="PageContainer/SettingsContainer/MarginContainer/TagsContainer/TagButtonsContainer/ResetTogglesButton" to="." method="_on_reset_toggles_button_pressed"]
+[connection signal="pressed" from="PageContainer/SettingsContainer/MarginContainer/TagsContainer/TagButtonsContainer/ResetTogglesButton" to="PageContainer/SettingsContainer/MarginContainer/TagsContainer/TagButtonsContainer/ResetTogglesButton" method="_on_pressed"]

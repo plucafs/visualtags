@@ -1,0 +1,140 @@
+[gd_scene load_steps=7 format=3 uid="uid://1hfenpjd2sb1"]
+
+[ext_resource type="Script" path="res://scripts/edit.gd" id="1_4eyjm"]
+[ext_resource type="Script" path="res://scripts/file_tags_line_edit.gd" id="2_csby6"]
+[ext_resource type="Texture2D" uid="uid://6c7aml8n7uqm" path="res://icons/chevron-down.svg" id="2_eo8ju"]
+[ext_resource type="Texture2D" uid="uid://cjlqhqwmuqbet" path="res://icons/type.svg" id="2_uqhgr"]
+[ext_resource type="PackedScene" uid="uid://xeib5kd7y8ns" path="res://scenes/tag_label.tscn" id="3_0k66d"]
+[ext_resource type="Texture2D" uid="uid://dngler37qpt8k" path="res://icons/tag.svg" id="3_7sv64"]
+
+[node name="MarginContainer" type="MarginContainer"]
+custom_minimum_size = Vector2(512, 0)
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 110.0
+grow_horizontal = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+script = ExtResource("1_4eyjm")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="FileNameBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/FileNameBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.1
+text = "Name"
+
+[node name="FilesNameLineEdit" type="LineEdit" parent="HBoxContainer/VBoxContainer/FileNameBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Add a file name"
+
+[node name="FileTagsBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/FileTagsBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.1
+text = "Tags"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/FileTagsBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 16
+
+[node name="FileTagsLineEdit" type="LineEdit" parent="HBoxContainer/VBoxContainer/FileTagsBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Add a tag"
+script = ExtResource("2_csby6")
+tags_list = PackedStringArray()
+
+[node name="TagsLabelsContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/FileTagsBoxContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 4.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.1
+text = "Tags list"
+
+[node name="TagsFlowContainer" type="HFlowContainer" parent="HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TagLabel" parent="HBoxContainer/VBoxContainer/HBoxContainer/TagsFlowContainer" instance=ExtResource("3_0k66d")]
+layout_mode = 2
+
+[node name="TagLabel2" parent="HBoxContainer/VBoxContainer/HBoxContainer/TagsFlowContainer" instance=ExtResource("3_0k66d")]
+layout_mode = 2
+
+[node name="TagLabel3" parent="HBoxContainer/VBoxContainer/HBoxContainer/TagsFlowContainer" instance=ExtResource("3_0k66d")]
+layout_mode = 2
+
+[node name="TagLabel4" parent="HBoxContainer/VBoxContainer/HBoxContainer/TagsFlowContainer" instance=ExtResource("3_0k66d")]
+layout_mode = 2
+
+[node name="TagLabel5" parent="HBoxContainer/VBoxContainer/HBoxContainer/TagsFlowContainer" instance=ExtResource("3_0k66d")]
+layout_mode = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="HBoxContainer"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="EditMinimizeButton" type="TextureButton" parent="HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+toggle_mode = true
+texture_normal = ExtResource("2_eo8ju")
+
+[node name="Control" type="Control" parent="HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="EditHideNameButton" type="TextureButton" parent="HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+toggle_mode = true
+button_pressed = true
+texture_normal = ExtResource("2_uqhgr")
+
+[node name="EditHideTagButton" type="TextureButton" parent="HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+toggle_mode = true
+button_pressed = true
+texture_normal = ExtResource("3_7sv64")
+
+[connection signal="text_submitted" from="HBoxContainer/VBoxContainer/FileNameBoxContainer/FilesNameLineEdit" to="." method="_on_files_name_line_edit_text_submitted"]
+[connection signal="focus_entered" from="HBoxContainer/VBoxContainer/FileTagsBoxContainer/HBoxContainer/FileTagsLineEdit" to="HBoxContainer/VBoxContainer/FileTagsBoxContainer/HBoxContainer/FileTagsLineEdit" method="_on_focus_entered"]
+[connection signal="text_submitted" from="HBoxContainer/VBoxContainer/FileTagsBoxContainer/HBoxContainer/FileTagsLineEdit" to="." method="_on_file_tags_line_edit_text_submitted"]

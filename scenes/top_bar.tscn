@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://w4lrobiltwev"]
+
+[ext_resource type="Script" path="res://scripts/top_bar.gd" id="1_7x1id"]
+[ext_resource type="Script" path="res://scripts/ActiveDirectoryLineEdit.gd" id="2_btlb4"]
+[ext_resource type="Texture2D" uid="uid://c4yns4tc6uabh" path="res://icons/external-link.svg" id="3_k4snt"]
+[ext_resource type="Texture2D" uid="uid://b7vqsvl34qqk" path="res://icons/github.svg" id="4_kdp62"]
+[ext_resource type="Script" path="res://scripts/GoToSettingPageButton.gd" id="5_yswnb"]
+
+[node name="TopBar" type="HBoxContainer"]
+script = ExtResource("1_7x1id")
+
+[node name="ActiveDirectoryLineEdit" type="LineEdit" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.385493, 0.385492, 0.385492, 1)
+editable = false
+flat = true
+script = ExtResource("2_btlb4")
+
+[node name="OpenDirButton" type="TextureButton" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture_normal = ExtResource("3_k4snt")
+stretch_mode = 3
+
+[node name="GoToGithubButton" type="TextureButton" parent="."]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+tooltip_text = "Open the GitHub repo (github.com/plucafs/visualtags)"
+toggle_mode = true
+button_pressed = true
+texture_normal = ExtResource("4_kdp62")
+stretch_mode = 3
+script = ExtResource("5_yswnb")
+
+[connection signal="pressed" from="OpenDirButton" to="." method="_on_open_dir_button_pressed"]

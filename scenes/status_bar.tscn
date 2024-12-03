@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://cya0pn7qepwbr"]
+
+[ext_resource type="Texture2D" uid="uid://cjm26hjeowwtl" path="res://icons/info.svg" id="1_q2rv3"]
+
+[node name="StatusBar" type="HBoxContainer"]
+
+[node name="TextureButton" type="TextureButton" parent="."]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture_normal = ExtResource("1_q2rv3")
+stretch_mode = 3
+
+[node name="StatusLabel" type="Label" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+size_flags_horizontal = 3
+vertical_alignment = 1
+autowrap_mode = 3
+text_overrun_behavior = 3
