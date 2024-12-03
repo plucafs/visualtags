@@ -20,3 +20,4 @@ mono_crash.*.json
 *.md
 !README.md
 .git.bak
+releases/
