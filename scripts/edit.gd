@@ -112,7 +112,8 @@ func update_file_name(new_name: String):
 		
 		tags = ""
 	
-	var new_file_path = slash + slash.join(dir_parts)
+	var starting_slash = "" if Utils.is_os_windows() else Utils.SLASH_UNIX
+	var new_file_path = starting_slash + slash.join(dir_parts)
 	
 	print("New file name\n	%s\n	%s" % [active_dir, new_file_path])
 	
