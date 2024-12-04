@@ -3,7 +3,7 @@ extends Node
 
 # Hidden directories and files are excluded via the property `include_hidden` set
 # to the `DirAccess` object
-var os_slash = Utils.get_os_slash()
+var os_slash = Utils.SLASH_UNIX
 var excluded_dirs = [
 	os_slash + "Heroic",
 	os_slash + "node_modules",
@@ -51,7 +51,7 @@ func get_files(directory: String, depth: int, file_list: Array, tag_list: Array)
 	dir.list_dir_begin()
 	
 	var skip = false
-	var slash_os = Utils.get_os_slash()
+	var slash_os = Utils.SLASH_UNIX
 	while true:
 		skip = false
 		var file_name = dir.get_next()
@@ -113,7 +113,7 @@ func get_number_of_files_to_analyze(depth: int, directory: String, is_recursive 
 	dir.include_navigational = false
 	dir.list_dir_begin()
 	
-	var slash_os = Utils.get_os_slash()
+	var slash_os = Utils.SLASH_UNIX
 	while true:
 		var file_name = dir.get_next()
 		if file_name.strip_edges().is_empty(): break

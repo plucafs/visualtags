@@ -79,7 +79,7 @@ func _on_edit_minimize_button_toggled(toggled_on: bool) -> void:
 	self.visible = !visible
 
 func update_file_name(new_name: String):
-	var slash = Utils.get_os_slash()
+	var slash = Utils.SLASH_UNIX
 	var dir_parts := Array(active_dir.split(slash))
 	dir_parts = dir_parts.filter(func(part: String): return part.to_lower().strip_edges() != "")
 	var file_name = dir_parts[-1]
@@ -123,7 +123,7 @@ func update_file_name(new_name: String):
 		active_dir = ""
 
 func update_file_tag(new_tags: PackedStringArray):
-	var slash = Utils.get_os_slash()
+	var slash = Utils.SLASH_UNIX
 	var extension = active_dir.get_extension()
 	if extension.is_empty(): pass
 	
