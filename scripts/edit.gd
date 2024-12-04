@@ -175,7 +175,8 @@ func update_file_tag(new_tags: PackedStringArray):
 			+ extension
 		)
 
-	var new_file_path = slash + slash.join(file_name_parts)
+	var starting_slash = "" if Utils.is_os_windows() else Utils.SLASH_UNIX
+	var new_file_path = starting_slash + slash.join(file_name_parts)
 	print("New tags\n	%s\n	%s" % [active_dir, new_file_path])
 	
 	var err := DirAccess.rename_absolute(active_dir, new_file_path)
