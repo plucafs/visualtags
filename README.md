@@ -64,6 +64,7 @@ chmod +x visualtags.x86_64
 5. Select a file and edit the tag field
 
 ### Internals
+[⮤ Back to top](#visualtags)
 The current implementetion doesn't watch the changes happening outside visualtags. 
 
 It scans the folders and displays a static list of files, that when edited will edit the file on the file system. Than, the directory is recursively re-scanned, and the files list updated.
@@ -91,6 +92,7 @@ git clone https://github.com/plucafs/visualtags
 	- The executable will be created
 
 ### Others projects
+[⮤ Back to top](#visualtags)
 - [filetags]( https://github.com/novoid/filetags) by novoid
 
 - [tagspaces](https://github.com/tagspaces/tagspaces) by tagspaces
